@@ -1,5 +1,6 @@
 # Jetbrains IDE specific files
 .idea/
+Legion.sln.DotSettings.user
 
 # Visual Studio 2015 user specific files
 .vs/

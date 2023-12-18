@@ -44,5 +44,5 @@ FTransform ULegionManagementComponent::GetTransformForSpawn() const
 		NavigationSystem->GetRandomReachablePointInRadius(Origin, SpawnRadius, RandomPoint);
 	}
 
-	return FTransform(RandomPoint.Location);
+	return FTransform(GetOwner()->GetActorRotation() ,RandomPoint.Location);
 }

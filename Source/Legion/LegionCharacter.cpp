@@ -10,6 +10,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Components/LegionerStateComponent.h"
+#include "Legioner/Legioner.h"
 #include "Public/Components/LegionManagementComponent.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -88,6 +90,9 @@ void ALegionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 		EnhancedInputComponent->BindAction(SpawnLegionerAction, ETriggerEvent::Started, this,
 		                                   &ThisClass::SpawnLegioner);
+
+		EnhancedInputComponent->BindAction(LegionerAttackAction, ETriggerEvent::Started, this,
+		                                   &ThisClass::LegionerAttack);
 	}
 	else
 	{
@@ -138,4 +143,18 @@ void ALegionCharacter::Look(const FInputActionValue& Value)
 void ALegionCharacter::SpawnLegioner()
 {
 	LegionManagementComponent->SpawnLegioner();
+}
+
+void ALegionCharacter::LegionerAttack()
+{
+	const TArray<ALegioner*>& Legioners = LegionManagementComponent->GetSpawnedLegioners();
+
+	for (const ALegioner* Legioner : Legioners)
+	{
+		ULegionerStateComponent* LegionerStateComponent = Legioner->GetComponentByClass<ULegionerStateComponent>();
+		if (!LegionerStateComponent)
+			continue;
+
+		LegionerStateComponent->ChangeState(ELegionerState::Attacking);
+	}
 }

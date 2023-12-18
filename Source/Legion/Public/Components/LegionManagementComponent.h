@@ -8,7 +8,7 @@
 
 class ALegioner;
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+UCLASS(ClassGroup=(Legion), meta=(BlueprintSpawnableComponent))
 class LEGION_API ULegionManagementComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -17,6 +17,8 @@ public:
 	ULegionManagementComponent();
 
 	bool SpawnLegioner();
+
+	const TArray<ALegioner*>& GetSpawnedLegioners() const { return SpawnedLegioners; }
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Config)

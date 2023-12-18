@@ -2,8 +2,11 @@
 
 
 #include "Legion/Public/Legioner/Legioner.h"
+#include "Components/LegionerStateComponent.h"
 
 ALegioner::ALegioner()
 {
 	PrimaryActorTick.bCanEverTick = false;
+
+	LegionerStateComponent = CreateDefaultSubobject<ULegionerStateComponent>("LegionerStateComponent");
 }

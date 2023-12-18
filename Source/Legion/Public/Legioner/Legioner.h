@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "Legioner.generated.h"
 
+class ULegionerStateComponent;
+
 UCLASS()
 class LEGION_API ALegioner : public ACharacter
 {
@@ -13,4 +15,8 @@ class LEGION_API ALegioner : public ACharacter
 
 public:
 	ALegioner();
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	ULegionerStateComponent* LegionerStateComponent;
 };

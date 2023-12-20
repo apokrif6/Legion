@@ -3,6 +3,7 @@
 
 #include "Legion/Public/Components/LegionManagementComponent.h"
 #include "NavigationSystem.h"
+#include "Components/LegionerStateComponent.h"
 #include "Legion/Public/Legioner/Legioner.h"
 
 ULegionManagementComponent::ULegionManagementComponent()
@@ -19,6 +20,11 @@ bool ULegionManagementComponent::SpawnLegioner()
 	if (!SpawnedLegioner)
 		return false;
 
+	if (ULegionerStateComponent* LegionerStateComponent = SpawnedLegioner->GetComponentByClass<
+		ULegionerStateComponent>())
+	{
+		LegionerStateComponent->ChangeState(ELegionerState::Spawning);
+	}
 	SpawnedLegioners.Add(SpawnedLegioner);
 
 	return true;
@@ -44,5 +50,5 @@ FTransform ULegionManagementComponent::GetTransformForSpawn() const
 		NavigationSystem->GetRandomReachablePointInRadius(Origin, SpawnRadius, RandomPoint);
 	}
 
-	return FTransform(GetOwner()->GetActorRotation() ,RandomPoint.Location);
+	return FTransform(GetOwner()->GetActorRotation(), RandomPoint.Location);
 }

@@ -133,7 +133,6 @@ void ALegionCharacter::Look(const FInputActionValue& Value)
 
 	if (Controller != nullptr)
 	{
-		// add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}

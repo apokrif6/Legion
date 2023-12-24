@@ -27,6 +27,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Config)
 	float SpawnRadius = 300.f;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Config)
+	int32 Limit = 3;
+	
 	virtual void BeginPlay() override;
 
 private:

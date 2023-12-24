@@ -16,6 +16,9 @@ bool ULegionManagementComponent::SpawnLegioner()
 	if (!CurrentChosenLegioner)
 		return false;
 
+	if (SpawnedLegioners.Num() >= Limit)
+		return false;
+
 	ALegioner* SpawnedLegioner = GetWorld()->SpawnActor<ALegioner>(CurrentChosenLegioner, GetTransformForSpawn());
 	if (!SpawnedLegioner)
 		return false;

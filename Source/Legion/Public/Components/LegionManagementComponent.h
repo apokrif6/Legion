@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "LegionManagementComponent.generated.h"
 
+enum class ELegionerState : uint8;
 class ALegioner;
 
 UCLASS(ClassGroup=(Legion), meta=(BlueprintSpawnableComponent))
@@ -20,6 +21,8 @@ public:
 
 	const TArray<ALegioner*>& GetSpawnedLegioners() const { return SpawnedLegioners; }
 
+	void ChangeStatesForLegioners(const ELegionerState NewState);
+	
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Config)
 	TArray<TSubclassOf<ALegioner>> AvailableLegioners;

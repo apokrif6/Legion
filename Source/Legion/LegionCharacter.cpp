@@ -93,6 +93,9 @@ void ALegionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 		EnhancedInputComponent->BindAction(LegionerAttackAction, ETriggerEvent::Started, this,
 		                                   &ThisClass::LegionerAttack);
+
+		EnhancedInputComponent->BindAction(LegionerBlockAction, ETriggerEvent::Started, this,
+		                                   &ThisClass::LegionerBlock);
 	}
 	else
 	{
@@ -146,14 +149,10 @@ void ALegionCharacter::SpawnLegioner()
 
 void ALegionCharacter::LegionerAttack()
 {
-	const TArray<ALegioner*>& Legioners = LegionManagementComponent->GetSpawnedLegioners();
+	LegionManagementComponent->ChangeStatesForLegioners(ELegionerState::Attacking);
+}
 
-	for (const ALegioner* Legioner : Legioners)
-	{
-		ULegionerStateComponent* LegionerStateComponent = Legioner->GetComponentByClass<ULegionerStateComponent>();
-		if (!LegionerStateComponent)
-			continue;
-
-		LegionerStateComponent->ChangeState(ELegionerState::Attacking);
-	}
+void ALegionCharacter::LegionerBlock()
+{
+	LegionManagementComponent->ChangeStatesForLegioners(ELegionerState::Blocking);
 }

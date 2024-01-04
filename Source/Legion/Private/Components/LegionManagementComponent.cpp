@@ -33,6 +33,19 @@ bool ULegionManagementComponent::SpawnLegioner()
 	return true;
 }
 
+void ULegionManagementComponent::ChangeStatesForLegioners(const ELegionerState NewState)
+{
+	for (const ALegioner* SpawnedLegioner : SpawnedLegioners)
+	{
+		ULegionerStateComponent* LegionerStateComponent = SpawnedLegioner->GetComponentByClass<
+			ULegionerStateComponent>();
+		if (!LegionerStateComponent)
+			continue;
+
+		LegionerStateComponent->ChangeState(NewState);
+	}
+}
+
 void ULegionManagementComponent::BeginPlay()
 {
 	Super::BeginPlay();

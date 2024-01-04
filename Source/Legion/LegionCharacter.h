@@ -44,6 +44,9 @@ class ALegionCharacter : public ACharacter
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LegionerAttackAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* LegionerBlockAction;
 	
 public:
 	ALegionCharacter();
@@ -72,4 +75,6 @@ private:
 	void SpawnLegioner();
 
 	void LegionerAttack();
+
+	void LegionerBlock();
 };
